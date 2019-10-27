@@ -17,6 +17,7 @@ import (
 	"net/http"
 	"os"
 	"strconv"
+    "log"
 
 	"github.com/stepupgo/stepupgo2-1/handler"
 	"github.com/stepupgo/stepupgo2-1/preview"
@@ -29,11 +30,11 @@ func main() {
 
 	db, err := sql.Open("sqlite3", "database.db")
 	if err != nil {
-		panic(err)
+        log.Fatal(err)
 	}
 
 	if err := initDB(db); err != nil {
-		panic(err)
+        log.Fatal(err)
 	}
 
 	v := &handler.Handler{}
