@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/stepupgo/stepupgo2-1/lottery"
 	"github.com/stepupgo/stepupgo2-1/templates"
+	"log"
 	"net/http"
 	"strconv"
 )
@@ -71,11 +72,17 @@ func (h Handler)PurchasePageHandler(w http.ResponseWriter, r *http.Request) {
 func (h Handler)PurchaseHandler(w http.ResponseWriter, r *http.Request) {
 	db, err := sql.Open("sqlite3", "database.db")
 	if err != nil {
-		panic(err)
+		log.Println(err)
+		const status = http.StatusInternalServerError
+		http.Error(w, http.StatusText(status), status)
+		return
 	}
 
 	if err := initDB(db); err != nil {
-		panic(err)
+		log.Println(err)
+		const status = http.StatusInternalServerError
+		http.Error(w, http.StatusText(status), status)
+		return
 	}
 	id := r.FormValue("id")
 	num, err := strconv.Atoi(r.FormValue("num"))
@@ -125,11 +132,17 @@ func (h Handler)PurchaseHandler(w http.ResponseWriter, r *http.Request) {
 func(h Handler) ResultHandler (w http.ResponseWriter, r *http.Request) {
 	db, err := sql.Open("sqlite3", "database.db")
 	if err != nil {
-		panic(err)
+		log.Println(err)
+		const status = http.StatusInternalServerError
+		http.Error(w, http.StatusText(status), status)
+		return
 	}
 
 	if err := initDB(db); err != nil {
-		panic(err)
+		log.Println(err)
+		const status = http.StatusInternalServerError
+		http.Error(w, http.StatusText(status), status)
+		return
 	}
 	resp1, err := http.Get("https://lottery-dot-tenntenn-samples.appspot.com/result?id=" + r.FormValue("id"))
 	if err != nil {
