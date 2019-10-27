@@ -6,7 +6,7 @@ var (
 	DB *sql.DB
 )
 
-func initDB() error {
+func createTableSQL() string {
 	const sql = `
 		CREATE TABLE IF NOT EXISTS purchased (
 		lottery_id  TEXT NOT NULL,
@@ -14,6 +14,12 @@ func initDB() error {
 		PRIMARY KEY(lottery_id, number)
 	);
 	`
+
+	return sql
+}
+
+func initDB() error {
+	sql := createTableSQL()
 	if _, err := DB.Exec(sql); err != nil {
 		return err
 	}
