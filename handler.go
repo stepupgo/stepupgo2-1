@@ -52,7 +52,7 @@ func (s *PageHandler) PurchasePageView(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, http.StatusText(status), status)
 		return
 	}
-
+	fmt.Println("l.Num:=",l.Num)
 	data := struct {
 		Lottery
 		Remain int64
@@ -60,6 +60,7 @@ func (s *PageHandler) PurchasePageView(w http.ResponseWriter, r *http.Request) {
 		Lottery: l,
 		Remain:  l.Num, // TODO: 残りを計算する
 	}
+	
 	if err := purchasePageTmpl.Execute(w, data); err != nil {
 		const status = http.StatusInternalServerError
 		http.Error(w, http.StatusText(status), status)
