@@ -1,8 +1,15 @@
 package persistence
 
+import (
+	"database/sql"
+	"log"
+
+	"stepupgo2-1/domain/model"
+)
+
 type LotteryPersistence struct{}
 
-func (lotteryPersistence LotteryPersistence) SelectByPrimaryKey(DB *sql.DB, LotteryID string) (*model.Lottery, error) {
+func (lotteryPersistence LotteryPersistence) SelectByPrimaryKey(DB *sql.DB, lotteryID string) (*model.Lottery, error) {
 	row := DB.QueryRow("SELECT * FROM lottery WHERE lottery_id = ?", lotteryID)
 	return convertToLottery(row)
 }
