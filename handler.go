@@ -8,7 +8,7 @@ import (
 	"strconv"
 )
 
-//Handler は http handlerをメソッド化するための構造体
+//Handler は http handlerを抽象化するための構造体
 type Handler struct {
 	db *sql.DB
 }
