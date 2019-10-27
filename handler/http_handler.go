@@ -17,7 +17,7 @@ type Handler struct {
 	DB *sql.DB
 }
 
-// handler for home page
+// HomeHandler provides a handler for Home
 func (h *Handler) HomeHandler(w http.ResponseWriter, r *http.Request) {
 	resp, err := http.Get("https://lottery-dot-tenntenn-samples.appspot.com/available_lotteries")
 	if err != nil {
@@ -41,7 +41,7 @@ func (h *Handler) HomeHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// handler for purchase page
+// PurchasePageHandler provides a handler for PurchasePage
 func (h *Handler) PurchasePageHandler(w http.ResponseWriter, r *http.Request) {
 	resp, err := http.Get("https://lottery-dot-tenntenn-samples.appspot.com/lottery?id=" + r.FormValue("id"))
 	if err != nil {
@@ -72,7 +72,7 @@ func (h *Handler) PurchasePageHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// handler for parchase
+// PurchaseHandler provides a handler for purchasing
 func (h *Handler) PurchaseHandler(w http.ResponseWriter, r *http.Request) {
 	id := r.FormValue("id")
 	num, err := strconv.Atoi(r.FormValue("num"))
@@ -119,7 +119,7 @@ func (h *Handler) PurchaseHandler(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, "/Purchase_page?id="+l.ID, http.StatusFound)
 }
 
-// handler for result
+// ResultHandler provides a handler for getting result
 func (h *Handler) ResultHandler(w http.ResponseWriter, r *http.Request) {
 	resp1, err := http.Get("https://lottery-dot-tenntenn-samples.appspot.com/result?id=" + r.FormValue("id"))
 	if err != nil {
