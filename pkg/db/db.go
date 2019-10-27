@@ -1,6 +1,9 @@
 package db
 
-import "database/sql"
+import (
+	"database/sql"
+	"log"
+)
 
 var (
 	DB *sql.DB
@@ -29,12 +32,12 @@ func initDB() error {
 func Init() {
 	db, err := sql.Open("sqlite3", "database.db")
 	if err != nil {
-		panic(err)
+		log.Println(err)
 	}
 
 	DB = db
 
 	if err := initDB(); err != nil {
-		panic(err)
+		log.Println(err)
 	}
 }
