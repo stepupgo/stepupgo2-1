@@ -58,11 +58,9 @@ func (c *Client) GetPurchasePage(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, http.StatusText(status), status)
 		return
 	}
-
 }
 
 func (c *Client) Purchase(w http.ResponseWriter, r *http.Request) {
-	db := c.DB
 	id := r.FormValue("id")
 	num, err := strconv.Atoi(r.FormValue("num"))
 	if err != nil {
@@ -88,7 +86,7 @@ func (c *Client) Purchase(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var count int
-	if err := db.QueryRow("SELECT COUNT(*) FROM purchased WHERE lottery_id = ?", l.ID).Scan(&count); err != nil {
+	if err := c.DB.QueryRow("SELECT COUNT(*) FROM purchased WHERE lottery_id = ?", l.ID).Scan(&count); err != nil {
 		const status = http.StatusInternalServerError
 		http.Error(w, http.StatusText(status), status)
 		return
@@ -98,7 +96,7 @@ func (c *Client) Purchase(w http.ResponseWriter, r *http.Request) {
 		const sql = "INSERT INTO purchased(lottery_id, number) values (?,?)"
 		format := fmt.Sprintf(`%%0%dd`, len(strconv.FormatInt(l.Num-1, 10)))
 		n := fmt.Sprintf(format, count+i)
-		if _, err := db.Exec(sql, id, n); err != nil {
+		if _, err := c.DB.Exec(sql, id, n); err != nil {
 			const status = http.StatusInternalServerError
 			http.Error(w, http.StatusText(status), status)
 			return
@@ -109,8 +107,6 @@ func (c *Client) Purchase(w http.ResponseWriter, r *http.Request) {
 }
 
 func (c *Client) Result(w http.ResponseWriter, r *http.Request) {
-	db := c.DB
-
 	resp1, err := http.Get("https://lottery-dot-tenntenn-samples.appspot.com/result?id=" + r.FormValue("id"))
 	if err != nil {
 		const status = http.StatusInternalServerError
@@ -154,7 +150,7 @@ func (c *Client) Result(w http.ResponseWriter, r *http.Request) {
 		Winners: map[string]*winner{},
 	}
 
-	rows, err := db.Query("SELECT number FROM purchased WHERE lottery_id = ?", l.ID)
+	rows, err := c.DB.Query("SELECT number FROM purchased WHERE lottery_id = ?", l.ID)
 	if err != nil {
 		const status = http.StatusInternalServerError
 		http.Error(w, http.StatusText(status), status)
