@@ -18,9 +18,9 @@ import (
 	"os"
 	"strconv"
 
-    "github.com/stepupgo/stepupgo2-1/handler"
-    "github.com/stepupgo/stepupgo2-1/types"
-    "github.com/stepupgo/stepupgo2-1/preview"
+	"github.com/stepupgo/stepupgo2-1/handler"
+	"github.com/stepupgo/stepupgo2-1/preview"
+	"github.com/stepupgo/stepupgo2-1/types"
 
 	_ "github.com/mattn/go-sqlite3"
 )
@@ -36,7 +36,7 @@ func main() {
 		panic(err)
 	}
 
-    v := &handler.Handler{}
+	v := &handler.Handler{}
 	http.HandleFunc("/", v.HomeHandler)
 
 	http.HandleFunc("/Purchase_page", func(w http.ResponseWriter, r *http.Request) {
