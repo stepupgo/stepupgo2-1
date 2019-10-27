@@ -14,6 +14,7 @@ import (
 	"net"
 	"net/http"
 	"os"
+	"log"
 
 	_ "github.com/mattn/go-sqlite3"
 )
@@ -21,12 +22,15 @@ import (
 func main() {
 
 	db, err := sql.Open("sqlite3", "database.db")
+
 	if err != nil {
-		panic(err)
+		log.Print(err)
 	}
 
+	defer db.Close()
+
 	if err := initDB(db); err != nil {
-		panic(err)
+		log.Print(err)
 	}
 
 	page_handle_func := &PageHandler{DB: db}
