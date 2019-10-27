@@ -39,7 +39,7 @@ func main() {
 	v := &handler.Handler{}
 	http.HandleFunc("/", v.HomeHandler)
 
-	http.HandleFunc("/Purchase_page", func(w http.ResponseWriter, r *http.Request) {
+	http.HandleFunc("/purchase_page", func(w http.ResponseWriter, r *http.Request) {
 		resp, err := http.Get("https://lottery-dot-tenntenn-samples.appspot.com/lottery?id=" + r.FormValue("id"))
 		if err != nil {
 			const status = http.StatusInternalServerError
@@ -69,7 +69,7 @@ func main() {
 		}
 	})
 
-	http.HandleFunc("/Purchase", func(w http.ResponseWriter, r *http.Request) {
+	http.HandleFunc("/purchase", func(w http.ResponseWriter, r *http.Request) {
 		id := r.FormValue("id")
 		num, err := strconv.Atoi(r.FormValue("num"))
 		if err != nil {
