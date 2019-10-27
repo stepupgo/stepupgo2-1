@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/stepupgo/stepupgo2-1/server/model"
-	"github.com/stepupgo/stepupgo2-1/view"
+	"github.com/stepupgo/stepupgo2-1/pkg/server/model"
+	"github.com/stepupgo/stepupgo2-1/pkg/view"
 )
 
 func TopPage() http.HandlerFunc {

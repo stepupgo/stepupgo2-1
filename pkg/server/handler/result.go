@@ -4,9 +4,9 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/stepupgo/stepupgo2-1/db"
-	"github.com/stepupgo/stepupgo2-1/server/model"
-	"github.com/stepupgo/stepupgo2-1/view"
+	"github.com/stepupgo/stepupgo2-1/pkg/db"
+	"github.com/stepupgo/stepupgo2-1/pkg/server/model"
+	"github.com/stepupgo/stepupgo2-1/pkg/view"
 )
 
 func Result() http.HandlerFunc {
