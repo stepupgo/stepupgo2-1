@@ -10,50 +10,16 @@ TODO
 */
 
 import (
-	"database/sql"
 	"encoding/json"
 	"fmt"
-	"net"
 	"net/http"
-	"os"
+	"stepupgo2-1/interfaces"
 	"strconv"
 
 	_ "github.com/mattn/go-sqlite3"
 )
 
 func main() {
-
-	db, err := sql.Open("sqlite3", "database.db")
-	if err != nil {
-		panic(err)
-	}
-
-	if err := initDB(db); err != nil {
-		panic(err)
-	}
-
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		resp, err := http.Get("https://lottery-dot-tenntenn-samples.appspot.com/available_lotteries")
-		if err != nil {
-			const status = http.StatusInternalServerError
-			http.Error(w, http.StatusText(status), status)
-			return
-		}
-		defer resp.Body.Close()
-
-		var lotteries []*Lottery
-		if err := json.NewDecoder(resp.Body).Decode(&lotteries); err != nil {
-			const status = http.StatusInternalServerError
-			http.Error(w, http.StatusText(status), status)
-			return
-		}
-
-		if err := listTmpl.Execute(w, lotteries); err != nil {
-			const status = http.StatusInternalServerError
-			http.Error(w, http.StatusText(status), status)
-			return
-		}
-	})
 
 	http.HandleFunc("/purchase_page", func(w http.ResponseWriter, r *http.Request) {
 		resp, err := http.Get("https://lottery-dot-tenntenn-samples.appspot.com/lottery?id=" + r.FormValue("id"))
@@ -215,24 +181,5 @@ func main() {
 		}
 	})
 
-	port := os.Getenv("PORT")
-	if port == "" {
-		port = "8080"
-	}
-	addr := net.JoinHostPort("", port)
-	http.ListenAndServe(addr, nil)
-}
-
-func initDB(db *sql.DB) error {
-	const sql = `
-CREATE TABLE IF NOT EXISTS purchased (
-	lottery_id  TEXT NOT NULL,
-	number 		TEXT NOT NULL,
-	PRIMARY KEY(lottery_id, number)
-);
-`
-	if _, err := db.Exec(sql); err != nil {
-		return err
-	}
-	return nil
+	interfaces.Run(8080)
 }
