@@ -1,4 +1,4 @@
-module github.com/stepupgo/stepupgo2-1
+module stepupgo2-1
 
 go 1.13
 
