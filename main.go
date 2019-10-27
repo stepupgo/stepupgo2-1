@@ -25,13 +25,11 @@ func main() {
 
 	db, err := sql.Open("sqlite3", "database.db")
 	if err != nil {
-		fmt.Printf("Failed to make connection between DB.")
-		return
+		panic(err)
 	}
 
 	if err := initDB(db); err != nil {
-		fmt.Printf("Failed to initialize DB.")
-		return
+		panic(err)
 	}
 	h := handlers{}
 	http.HandleFunc("/", h.listPage())
