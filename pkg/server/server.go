@@ -6,6 +6,7 @@ import (
 	"os"
 
 	"github.com/stepupgo/stepupgo2-1/db"
+	"github.com/stepupgo/stepupgo2-1/di"
 	"github.com/stepupgo/stepupgo2-1/server/handler"
 )
 
@@ -27,6 +28,7 @@ func connection() {
 
 func Run() {
 	db.Init()
+	di.Init()
 	routing()
 	connection()
 }
