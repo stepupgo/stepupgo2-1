@@ -21,12 +21,8 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
-func main() {
-
-	db, err := sql.Open("sqlite3", "database.db")
-	if err != nil {
-		panic(err)
-	}
+type handler struct {
+}
 
 	if err := initDB(db); err != nil {
 		panic(err)
