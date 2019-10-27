@@ -28,16 +28,16 @@ import (
 
 func main() {
 
-    // Openに失敗したらそれ以降の処理はできないので
-    // Fatalでos.Exit(1)する
+	// Openに失敗したらそれ以降の処理はできないので
+	// Fatalでos.Exit(1)する
 	db, err := sql.Open("sqlite3", "database.db")
 	if err != nil {
 		log.Fatal(err)
 	}
-    defer db.Close()
+	defer db.Close()
 
-    // dbのinitializeに失敗したらそれ以降の処理はできないので
-    // Fatalでos.Exit(1)する
+	// dbのinitializeに失敗したらそれ以降の処理はできないので
+	// Fatalでos.Exit(1)する
 	if err := initDB(db); err != nil {
 		log.Fatal(err)
 	}
