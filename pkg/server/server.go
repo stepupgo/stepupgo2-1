@@ -27,8 +27,11 @@ func connection() {
 }
 
 func Run() {
+	// Initialize
 	db.Init()
 	di.Init()
+
+	// Service
 	routing()
 	connection()
 }
