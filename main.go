@@ -34,7 +34,7 @@ func main() {
 
 	h := &handler{}
 
-	http.HandleFunc("/", h.Home())
+	http.HandleFunc("/", h.Home)
 
 	http.HandleFunc("/purchase_page", func(w http.ResponseWriter, r *http.Request) {
 		resp, err := http.Get("https://lottery-dot-tenntenn-samples.appspot.com/lottery?id=" + r.FormValue("id"))
