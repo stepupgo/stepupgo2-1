@@ -3,6 +3,7 @@
 see: http://bit.ly/devlopwithgo
 
 ## Structure
+```
 ├── pkg:
 │   ├── application: サービスロジック
 │   ├── di: 依存性の注入
@@ -11,3 +12,4 @@ see: http://bit.ly/devlopwithgo
 │       ├── handler: ハンドラ
 │       └── server.go: ルーティング
 └── main.go: 
+```
