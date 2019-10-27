@@ -1,8 +1,8 @@
-package main
+package view
 
 import "html/template"
 
-var listTmpl = template.Must(template.New("list").Parse(`<!DOCTYPE html>
+var ListTmpl = template.Must(template.New("list").Parse(`<!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="utf-8">
@@ -20,7 +20,7 @@ var listTmpl = template.Must(template.New("list").Parse(`<!DOCTYPE html>
 	</body>
 </html>`))
 
-var purchasePageTmpl = template.Must(template.New("purchase_page").Parse(`<!DOCTYPE html>
+var PurchasePageTmpl = template.Must(template.New("purchase_page").Parse(`<!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="utf-8">
@@ -48,7 +48,7 @@ var purchasePageTmpl = template.Must(template.New("purchase_page").Parse(`<!DOCT
 	</body>
 </html>`))
 
-var resultTmpl = template.Must(template.New("result").Parse(`<!DOCTYPE html>
+var ResultTmpl = template.Must(template.New("result").Parse(`<!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="utf-8">
