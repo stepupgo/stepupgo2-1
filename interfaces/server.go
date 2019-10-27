@@ -28,11 +28,13 @@ func Routes() *httprouter.Router {
 	router.GET("/", handler.Index)
 
 	//Lottery Route
-	router.GET("/lottery", handler.HandleLotteryGet)
+	router.GET("/lottery", handler.HandleLotteryGet)//idによって取ってくる
 	router.GET("/available_lotteries", handler.HandleAvailableLotteriesGet)
 
-	//result Route
-	//router.GET("/result")
+	//purchase Route
+	// router.GET("/purchase_page", handler.HandlePurchasePageGet)
+	// router.POST("/purchase", Handler.HandlePurchase)//idによって取ってくる
+	// router.GET("/result")
 
 	return router
 }

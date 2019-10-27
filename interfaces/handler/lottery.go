@@ -2,6 +2,7 @@ package handler
 
 import (
 	"encoding/json"
+	"errors"
 	"log"
 	"net/http"
 
@@ -12,15 +13,22 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-func HandleLotteryGet(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
-	//TODO: lottery_idを取得
+func HandleLotteryGet(writer http.ResponseWriter, request *http.Request, _ httprouter.Params) {
+	id := request.FormValue("id")
+	if id == "" {
+		log.Println(errors.New("lottery_id is nil"))
+		response.Error(writer, http.StatusBadRequest, "Bad Request")
+		return
+	}
 
-	lottery, err := usecase.LotteryUsecase{}.SelectByPrimaryKey(config.DB, params)
+	lotteryUsecase := usecase.LotteryUsecase{}
+	var err error
+	lotteryUsecase, err = usecase.LotteryUsecase{}.SelectByPrimaryKey(config.DB, id)
 	if err != nil {
 		log.Println(err)
 		response.Error(writer, http.StatusInternalServerError, "Internal Server Error")
 	}
-	response.JSON(writer, http.StatusOK, lottery)
+	response.JSON(writer, http.StatusOK, lotteryUsecase)
 
 }
 

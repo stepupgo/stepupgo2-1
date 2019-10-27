@@ -7,7 +7,9 @@ import (
 	"stepupgo2-1/infrastructure/persistence"
 )
 
-type LotteryUsecase struct{}
+type LotteryUsecase struct{
+	Lottery *model.Lottery
+}
 
 func (looteryUsecase LotteryUsecase) SelectByPrimaryKey(DB *sql.DB, lotteryID string) (*model.Lottery, error) {
 	lottery, err := repository.LotteryRepository(persistence.LotteryPersistence{}).SelectByPrimaryKey(DB, lotteryID)
