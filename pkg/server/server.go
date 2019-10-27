@@ -5,9 +5,9 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/stepupgo/stepupgo2-1/db"
-	"github.com/stepupgo/stepupgo2-1/di"
-	"github.com/stepupgo/stepupgo2-1/server/handler"
+	"github.com/stepupgo/stepupgo2-1/pkg/db"
+	"github.com/stepupgo/stepupgo2-1/pkg/di"
+	"github.com/stepupgo/stepupgo2-1/pkg/server/handler"
 )
 
 func routing() {
