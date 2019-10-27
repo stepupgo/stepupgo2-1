@@ -6,7 +6,7 @@ var listTmpl = template.Must(template.New("list").Parse(`<!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>宝くじ一覧</title>
+		<title>Lotteries</title>
 	</head>
 	<body>
 		<ul>
