@@ -28,8 +28,8 @@ import (
 
 func main() {
 
-	// Openに失敗したらそれ以降の処理はできないので
-	// Fatalでos.Exit(1)する
+	// Openに失敗したら
+	// それ以降の処理はできないのでos.Exit(1)する
 	db, err := sql.Open("sqlite3", "database.db")
 	if err != nil {
 		log.Printf("failed to open : %v\n", err)
@@ -37,8 +37,8 @@ func main() {
 	}
 	defer db.Close()
 
-	// dbのinitializeに失敗したらそれ以降の処理はできないので
-	// Fatalでos.Exit(1)する
+	// dbのinitializeに失敗したら
+	// それ以降の処理はできないのでos.Exit(1)する
 	if err := initDB(db); err != nil {
 		log.Printf("failed to initialize : %v\n", err)
 		os.Exit(1)
