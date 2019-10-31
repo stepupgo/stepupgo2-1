@@ -11,6 +11,7 @@ TODO
 
 import (
 	"database/sql"
+	"log"
 	"net"
 	"net/http"
 	"os"
@@ -22,10 +23,12 @@ func main() {
 
 	db, err := sql.Open("sqlite3", "database.db")
 	if err != nil {
-		panic(err)
+		log.Println(err)
+		os.Exit(1)
 	}
 	if err := initDB(db); err != nil {
-		panic(err)
+		log.Println(err)
+		os.Exit(1)
 	}
 
 	handler := Handler{
